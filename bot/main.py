@@ -1,7 +1,8 @@
 import json
 from pathlib import Path
 
-from game.game import Game
+from bot.game.game import Game
+from bot.game.gameinfocache import GameInfoCache
 
 import sc2
 
@@ -13,6 +14,10 @@ class MyBot(sc2.BotAI):
 
     def __init__(self):
         self.Game = Game(self)
+        self.GameInfoCache = GameInfoCache(self)
 
     async def on_step(self, iteration):
-        pass
+        self.Game.start_frame()
+        self.GameInfoCache.on_frame();
+        print(self.GameInfoCache.production.get(sc2.AbilityId.PROTOSSBUILD_NEXUS))
+        self.Game.end_frame();

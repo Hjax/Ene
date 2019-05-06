@@ -36,7 +36,7 @@ class GameInfoCache:
                 if (unit.is_ready):
                     self.counts_friendly[unit.type_id] = self.counts_friendly.get(unit.type_id, 0) + 1
                 else:
-                    self.production[self.bot.Game.get_production_ability(unit.type_id) = self.production.get(order.ability, 0) + 1
+                    self.production[self.bot.Game.get_production_ability(unit.type_id)] = self.production.get(self.bot.Game.get_production_ability(unit.type_id), 0) + 1
                 self.visible_friendly[unit.tag] = unit
                 for order in unit.orders:
                     self.production[order.ability] = self.production.get(order.ability, 0) + 1
@@ -49,4 +49,10 @@ class GameInfoCache:
                                     self.workers_building.add(unit.tag)
                                     break
 
+            elif (unit.alliance == sc2.data.Alliance.Enemy):
+                self.counts_enemy[unit.type_id] = self.counts_enemy.get(unit.type_id, 0) + 1
+                self.visible_enemy[unit.tag] = unit
+                
+            else:
+                self.visible_neutral[unit.tag] = unit
 
