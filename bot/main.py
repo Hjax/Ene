@@ -17,7 +17,8 @@ class MyBot(sc2.BotAI):
         self.GameInfoCache = GameInfoCache(self)
 
     async def on_step(self, iteration):
-        self.Game.start_frame()
+        await self.Game.start_frame()
         self.GameInfoCache.on_frame();
-        print(self.GameInfoCache.production.get(sc2.AbilityId.PROTOSSBUILD_NEXUS))
-        self.Game.end_frame();
+        if (self.GameInfoCache.production.get(sc2.AbilityId.PROTOSSBUILD_NEXUS, 0) > 0):
+            print("woooooooo")
+        await self.Game.end_frame();

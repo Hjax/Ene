@@ -1,18 +1,21 @@
 import sc2
-from constants import Constants
+from bot.constants import Constants
 
 class Game:
     def __init__(self, bot):
         self.bot = bot
         self.actions = []
+        self.messages = []
         self.spending = [0, 0]
     
-    def start_frame(self):
+    async def start_frame(self):
         self.actions = []
         self.spending = [0, 0]
 
-    def end_frame(self):
+    async def end_frame(self):
         self.bot.do_actions(self.actions)
+        for message in self.messages:
+            await self.bot.chat_send(message)
     
     def unit_type_data(self):
         return self.bot._game_data.units
@@ -29,8 +32,8 @@ class Game:
     # TODO precompute this
     def get_production_ability(self, unittype):
         for unitdatakey in self.unit_type_data().keys():
-            if unittype == unitdatakey:
-                return self.unit_type_data()[unitdatakey].creation_abillity
+            if unittype.value == unitdatakey:
+                return self.unit_type_data()[unitdatakey].creation_ability
         return None
 
     def effects(self):
@@ -50,7 +53,7 @@ class Game:
 
     def chat(self, message):
         if (Constants.CHAT):
-            await self.bot.chat_send(message)
+            self.messages.append(message)
 
     def visible(self, point) -> bool:
         return self.bot.is_visible(point)
@@ -61,7 +64,7 @@ class Game:
     def frame(self):
         return self.bot.state.game_loop
 
-    def check_placement(self, building, position):
+    async def check_placement(self, building, position):
         return await self.bot.can_place(building, position)
 
     def supply(self):
@@ -102,9 +105,6 @@ class Game:
 
     def is_worker(self, unittype):
         return unittype in [sc2.UnitTypeId.DRONE, sc2.UnitTypeId.SCV, sc2.UnitTypeId.PROBE]
-    
-    def availible_abilities(self, unit):
-        return await self.bot.get_availible_abilities(unit)
 
     def resources_killed(self):
         return [self.bot.state.score.killed_minerals_army + self.bot.state.score.killed_minerals_economy, self.bot.state.score.killed_vespene_army + self.bot.state.score.killed_vespene_economy]

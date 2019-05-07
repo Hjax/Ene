@@ -32,24 +32,24 @@ class GameInfoCache:
         for unit in self.bot.Game.units():
             self.all_units[unit.tag] = unit
 
-            if (unit.alliance == sc2.data.Alliance.Self):
+            if (unit.alliance == sc2.data.Alliance.Self.value):
                 if (unit.is_ready):
                     self.counts_friendly[unit.type_id] = self.counts_friendly.get(unit.type_id, 0) + 1
                 else:
-                    self.production[self.bot.Game.get_production_ability(unit.type_id)] = self.production.get(self.bot.Game.get_production_ability(unit.type_id), 0) + 1
+                    self.production[self.bot.Game.get_production_ability(unit.type_id).id] = self.production.get(self.bot.Game.get_production_ability(unit.type_id).id, 0) + 1
                 self.visible_friendly[unit.tag] = unit
                 for order in unit.orders:
-                    self.production[order.ability] = self.production.get(order.ability, 0) + 1
+                    self.production[order.ability.id] = self.production.get(order.ability.id, 0) + 1
                     if (self.bot.Game.is_worker(unit.type_id)):
-                        if order.ability == sc2.AbilityId.ZERGBUILD_EXTRACTOR or order.ability == sc2.AbilityId.PROTOSSBUILD_ASSIMILATOR or order.ability == sc2.AbilityId.TERRANBUILD_REFINERY:
+                        if order.ability.id == sc2.AbilityId.ZERGBUILD_EXTRACTOR or order.ability.id == sc2.AbilityId.PROTOSSBUILD_ASSIMILATOR or order.ability.id == sc2.AbilityId.TERRANBUILD_REFINERY:
                             self.claimed_gases.add(order.target.tag)
-                        if (order.ability != sc2.AbilityId.HARVEST_GATHER and order.ability != sc2.AbilityId.HARVEST_RETURN):
-                            for unitdata in self.bot.Game.unit_type_data():
-                                if order.ability == unitdata.creation_abillity:
+                        if (order.ability.id != sc2.AbilityId.HARVEST_GATHER and order.ability.id != sc2.AbilityId.HARVEST_RETURN):
+                            for unitdata in self.bot.Game.unit_type_data().values():
+                                if order.ability.id == unitdata.creation_ability:
                                     self.workers_building.add(unit.tag)
                                     break
 
-            elif (unit.alliance == sc2.data.Alliance.Enemy):
+            elif (unit.alliance == sc2.data.Alliance.Enemy.value):
                 self.counts_enemy[unit.type_id] = self.counts_enemy.get(unit.type_id, 0) + 1
                 self.visible_enemy[unit.tag] = unit
                 
