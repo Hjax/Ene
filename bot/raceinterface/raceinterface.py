@@ -19,4 +19,19 @@ class RaceInterface:
                 else:
                     self.bot.game.unit_command(unit, creation_ability)
     
+        
+    def get_race_worker(self, race):
+        if (race == sc2.Race.Protoss.value):
+            return sc2.UnitTypeId.PROBE
+        elif (race == sc2.Race.Terran.value):
+            return sc2.UnitTypeId.SCV
+        else:
+            return sc2.UnitTypeId.DRONE
     
+    def get_race_supply_structure(self, race):
+        if (race == sc2.Race.Protoss.value):
+            return sc2.UnitTypeId.PYLON
+        elif (race == sc2.Race.Terran.value):
+            return sc2.UnitTypeId.SUPPLYDEPOT
+        else:
+            return sc2.UnitTypeId.OVERLORD

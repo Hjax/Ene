@@ -114,14 +114,6 @@ class Game:
 
     def race(self):
         return self.bot.race.value
-    
-    def get_race_worker(self, race):
-        if (race == sc2.Race.Protoss.value):
-            return sc2.UnitTypeId.PROBE
-        elif (race == sc2.Race.Terran.value):
-            return sc2.UnitTypeId.SCV
-        else:
-            return sc2.UnitTypeId.DRONE
 
     def resources_killed(self):
         return [self.bot.state.score.killed_minerals_army + self.bot.state.score.killed_minerals_economy, self.bot.state.score.killed_vespene_army + self.bot.state.score.killed_vespene_economy]

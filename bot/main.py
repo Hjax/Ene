@@ -21,7 +21,9 @@ class MyBot(sc2.BotAI):
     async def on_step(self, iteration):
         self.game.start_frame()
 
-        if (self.workers.amount < 15):
-            self.race_interface.make(self.game.get_race_worker(self.game.race())) 
+        if (self.game.supply() == self.game.supply_cap()):
+            self.race_interface.make(self.race_interface.get_race_supply_structure(self.game.race()))
+        else:
+            self.race_interface.make(self.race_interface.get_race_worker(self.game.race())) 
 
         await self.game.end_frame()
