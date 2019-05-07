@@ -19,5 +19,6 @@ class MyBot(sc2.BotAI):
     async def on_step(self, iteration):
         await self.Game.start_frame()
         self.GameInfoCache.on_frame();
-        print(self.GameInfoCache.production.get(sc2.AbilityId.TERRANBUILD_SUPPLYDEPOT, 0))
+        if (self.GameInfoCache.production.get(sc2.AbilityId.PROTOSSBUILD_NEXUS, 0) > 0):
+            print("woooooooo")
         await self.Game.end_frame();
