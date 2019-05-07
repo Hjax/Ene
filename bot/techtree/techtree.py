@@ -1,7 +1,8 @@
 import json
 
 class TechTree:
-    def __init__(self):
+    def __init__(self, bot):
+        self.bot = bot
         self.data = json.loads(open("data.json", "r").read())
 
     def get_ability_data(self, id):
@@ -19,8 +20,8 @@ class TechTree:
             if item["id"] == id:
                 return item
     
-    def get_unit_with_ability(self, ability_id):
+    def get_unit_with_ability(self, abilitytype):
         for item in self.data["Unit"]:
             for ability in item["abilities"]:
-                if ability["ability"] == ability_id:
-                    return item["id"]
+                if ability["ability"] == abilitytype.value:
+                    return self.bot.game.get_unit_by_id(item["id"])

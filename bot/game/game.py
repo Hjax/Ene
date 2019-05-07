@@ -8,12 +8,12 @@ class Game:
         self.messages = []
         self.spending = [0, 0]
     
-    async def start_frame(self):
+    def start_frame(self):
         self.actions = []
         self.spending = [0, 0]
 
     async def end_frame(self):
-        self.bot.do_actions(self.actions)
+        await self.bot.do_actions(self.actions)
         for message in self.messages:
             await self.bot.chat_send(message)
     
@@ -33,8 +33,11 @@ class Game:
     def get_production_ability(self, unittype):
         for unitdatakey in self.unit_type_data().keys():
             if unittype.value == unitdatakey:
-                return self.unit_type_data()[unitdatakey].creation_ability
+                return self.unit_type_data()[unitdatakey].creation_ability.id
         return None
+    
+    def get_unit_by_id(self, unittypeid):
+        return self.unit_type_data()[unittypeid].id
 
     def effects(self):
         return self.bot.state.effects
@@ -105,6 +108,20 @@ class Game:
 
     def is_worker(self, unittype):
         return unittype in [sc2.UnitTypeId.DRONE, sc2.UnitTypeId.SCV, sc2.UnitTypeId.PROBE]
+
+    def is_structure(self, unittype):
+        pass
+
+    def race(self):
+        return self.bot.race.value
+    
+    def get_race_worker(self, race):
+        if (race == sc2.Race.Protoss.value):
+            return sc2.UnitTypeId.PROBE
+        elif (race == sc2.Race.Terran.value):
+            return sc2.UnitTypeId.SCV
+        else:
+            return sc2.UnitTypeId.DRONE
 
     def resources_killed(self):
         return [self.bot.state.score.killed_minerals_army + self.bot.state.score.killed_minerals_economy, self.bot.state.score.killed_vespene_army + self.bot.state.score.killed_vespene_economy]

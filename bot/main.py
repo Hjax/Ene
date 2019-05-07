@@ -2,7 +2,8 @@ import json
 from pathlib import Path
 
 from bot.game.game import Game
-from bot.game.gameinfocache import GameInfoCache
+from bot.techtree.techtree import TechTree
+from bot.raceinterface.raceinterface import RaceInterface
 
 import sc2
 
@@ -13,12 +14,14 @@ class MyBot(sc2.BotAI):
         NAME = json.load(f)["name"]
 
     def __init__(self):
-        self.Game = Game(self)
-        self.GameInfoCache = GameInfoCache(self)
+        self.game = Game(self)
+        self.tech_tree = TechTree(self)
+        self.race_interface = RaceInterface(self)
 
     async def on_step(self, iteration):
-        await self.Game.start_frame()
-        self.GameInfoCache.on_frame();
-        if (self.GameInfoCache.production.get(sc2.AbilityId.PROTOSSBUILD_NEXUS, 0) > 0):
-            print("woooooooo")
-        await self.Game.end_frame();
+        self.game.start_frame()
+
+        if (self.workers.amount < 15):
+            self.race_interface.make(self.game.get_race_worker(self.game.race())) 
+
+        await self.game.end_frame()
