@@ -39,7 +39,9 @@ class MyBot(sc2.BotAI):
 
         if (self.game.supply() == self.game.supply_cap()):
             self.race_interface.make(self.race_interface.get_race_supply_structure(self.game.race()))
+        elif (self.game.minerals() > 300):
+             self.race_interface.expand()
         else:
-            self.race_interface.make(self.race_interface.get_race_worker(self.game.race())) 
+            self.race_interface.make_worker()
 
         await self.game.end_step()

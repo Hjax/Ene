@@ -6,6 +6,6 @@ class BuildingPlacement:
     
     def get_placement_for(self, unittype):
         if self.bot.game.is_command_structure(unittype):
-            return self.bot.base_manager.next_base()
+            return self.bot.base_manager.next_base().position
             
         

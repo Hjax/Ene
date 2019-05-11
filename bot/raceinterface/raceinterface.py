@@ -19,11 +19,25 @@ class RaceInterface:
                 else:
                     self.bot.game.unit_command(unit, creation_ability)
     
+    def expand(self):
+        self.make(self.get_race_command_structure(self.bot.game.race()))
+    
+    def make_worker(self):
+        self.make(self.get_race_worker(self.bot.game.race())) 
+    
     def get_free_builder(self):
         workers = self.bot.game.workers()
         for worker in workers:
             if worker.is_idle or worker.is_collecting:
                 return worker
+    
+    def get_race_command_structure(self, race):
+        if (race == sc2.Race.Protoss.value):
+            return sc2.UnitTypeId.NEXUS
+        elif (race == sc2.Race.Terran.value):
+            return sc2.UnitTypeId.COMMANDCENTER
+        else:
+            return sc2.UnitTypeId.HATCHERY
 
     def get_race_worker(self, race):
         if (race == sc2.Race.Protoss.value):

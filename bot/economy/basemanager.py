@@ -14,7 +14,7 @@ class BaseManager:
         for structure in self.bot.game.units():
             if self.bot.game.is_command_structure(structure.type_id):
                 for base in self.bases:
-                    if base.location.distance_to(structure.position) < 5:
+                    if base.position.distance_to(structure.position) < 5:
                         base.set_command_structure(structure)
         for base in self.bases:
             base.update()
@@ -23,7 +23,7 @@ class BaseManager:
         best = None 
         for base in self.bases:
             if base.has_command_structure_of(sc2.data.Alliance.Self):
-                if best == None or best.location.distance_to(self.bot.scouting.closest_enemy_spawn_to(best.location)) < base.location.distance_to(self.bot.scouting.closest_enemy_spawn_to(base.location.location)):
+                if best == None or best.position.distance_to(self.bot.scouting.closest_enemy_spawn_to(best.position)) < base.position.distance_to(self.bot.scouting.closest_enemy_spawn_to(base.position)):
                     best = base 
         return best
     
@@ -32,8 +32,8 @@ class BaseManager:
         best_dist = 9999
         for base in self.bases:
             if not base.has_command_structure():
-                if best is None or self.main_base().location.distance_to(base.location) - base.location.distance_to(self.bot.scouting.closest_enemy_spawn()) < best_dist:
-                    best_dist = self.main_base().location.distance_to(base.location) - base.location.distance_to(self.bot.scouting.closest_enemy_spawn()) < best_dist
+                if best is None or self.main_base().position.distance_to(base.position) - base.position.distance_to(self.bot.scouting.closest_enemy_spawn()) < best_dist:
+                    best_dist = self.main_base().position.distance_to(base.position) - base.position.distance_to(self.bot.scouting.closest_enemy_spawn()) < best_dist
                     best = base
         return best
 

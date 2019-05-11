@@ -121,7 +121,7 @@ class Game:
         return self.bot.workers
 
     def enemy_spawn_locations(self):
-        return self.bot.enemy_spawn_locations
+        return self.bot.enemy_start_locations
 
     def known_enemy_structures(self):
         return self.bot.cached_known_enemy_structures

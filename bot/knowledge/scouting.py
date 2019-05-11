@@ -23,4 +23,4 @@ class Scouting:
         return best 
     
     def closest_enemy_spawn(self):
-        return self.closest_enemy_spawn_to(self.bot.game.start_location())
+        return self.closest_enemy_spawn_to(self.bot.game.spawn_location())
