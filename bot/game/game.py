@@ -7,15 +7,17 @@ class Game:
         self.actions = []
         self.messages = []
         self.spending = [0, 0]
+        self.extra_supply = 0
     
-    def start_frame(self):
+    def start_step(self):
         self.actions = []
         self.spending = [0, 0]
+        self.extra_supply = 0
 
-    async def end_frame(self):
-        await self.bot.do_actions(self.actions)
+    async def end_step(self):
         for message in self.messages:
             await self.bot.chat_send(message)
+        await self.bot.do_actions(self.actions)
     
     def unit_type_data(self):
         return self.bot._game_data.units
@@ -114,6 +116,18 @@ class Game:
 
     def race(self):
         return self.bot.race.value
+    
+    def workers(self):
+        return self.bot.workers
+
+    def enemy_spawn_locations(self):
+        return self.bot.enemy_spawn_locations
+
+    def known_enemy_structures(self):
+        return self.bot.cached_known_enemy_structures
+    
+    def spawn_location(self):
+        return self.bot.start_location
 
     def resources_killed(self):
         return [self.bot.state.score.killed_minerals_army + self.bot.state.score.killed_minerals_economy, self.bot.state.score.killed_vespene_army + self.bot.state.score.killed_vespene_economy]
