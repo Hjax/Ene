@@ -33,9 +33,6 @@ class BuildingPlacement:
 
     # an adjusted find_placement method that avoids mineral lines
     async def find_placement_avoiding(self, building, near, avoid, max_distance=20, placement_step: int=2):
-        """Finds a placement location for building."""
-
-
         if isinstance(building, sc2.UnitTypeId):
             building = self.bot._game_data.units[building.value].creation_ability
         else:  # AbilityId

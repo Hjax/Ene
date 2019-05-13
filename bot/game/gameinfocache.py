@@ -64,4 +64,13 @@ class GameInfoCache:
                     self.visible_neutral[unit.type_id] = [unit]
 
     def count(self, unittype, alliance):
-        pass
+        if alliance == sc2.data.Alliance.Enemy:
+            if unittype in self.visible_enemy:
+                return len(self.visible_enemy[unittype])
+        elif alliance == sc2.data.Alliance.Self:
+            if unittype in self.visible_friendly:
+                return len(self.visible_friendly[unittype])
+        else:
+            if unittype in self.visible_neutral:
+                return len(self.visible_neutral[unittype])
+        return 0

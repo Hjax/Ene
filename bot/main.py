@@ -47,12 +47,16 @@ class MyBot(sc2.BotAI):
         self.scouting.on_step()
         self.base_manager.on_step()
 
+        await self.race_interface.make_worker()
+        await self.race_interface.make(sc2.UnitTypeId.ZEALOT)
+
         if (self.game.supply() == self.game.supply_cap() and self.game.minerals() > 100):
             await self.race_interface.make(self.race_interface.get_race_supply_structure())
+        if (self.game.minerals() > 150 and self.game_info_cache.count(sc2.UnitTypeId.GATEWAY, sc2.data.Alliance.Self) < 10):
+            await self.race_interface.make(sc2.UnitTypeId.GATEWAY)
         elif (self.game.minerals() > 400):
              await self.race_interface.expand()
-        else:
-            await self.race_interface.make_worker()
+            
 
         await self.game.end_step()
 
