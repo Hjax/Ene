@@ -2,10 +2,9 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>56d385ff-6a93-471f-9cf5-1b33447fa2c3</ProjectGuid>
+    <ProjectGuid>06e191cd-bb92-4341-87c1-3729a10c2f70</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>
-    </StartupFile>
+    <StartupFile>run_locally.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -21,6 +20,91 @@
     <DebugSymbols>true</DebugSymbols>
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="benchmark.py" />
+    <Compile Include="bot\constants.py" />
+    <Compile Include="bot\economy\base.py" />
+    <Compile Include="bot\economy\basemanager.py" />
+    <Compile Include="bot\game\game.py" />
+    <Compile Include="bot\game\gameinfocache.py" />
+    <Compile Include="bot\knowledge\scouting.py" />
+    <Compile Include="bot\main.py" />
+    <Compile Include="bot\raceinterface\buildingplacement.py" />
+    <Compile Include="bot\raceinterface\raceinterface.py" />
+    <Compile Include="bot\sc2\action.py" />
+    <Compile Include="bot\sc2\bot_ai.py" />
+    <Compile Include="bot\sc2\cache.py" />
+    <Compile Include="bot\sc2\client.py" />
+    <Compile Include="bot\sc2\constants.py" />
+    <Compile Include="bot\sc2\controller.py" />
+    <Compile Include="bot\sc2\data.py" />
+    <Compile Include="bot\sc2\game_data.py" />
+    <Compile Include="bot\sc2\game_info.py" />
+    <Compile Include="bot\sc2\game_state.py" />
+    <Compile Include="bot\sc2\helpers\control_group.py" />
+    <Compile Include="bot\sc2\helpers\devtools.py" />
+    <Compile Include="bot\sc2\helpers\__init__.py" />
+    <Compile Include="bot\sc2\ids\ability_id.py" />
+    <Compile Include="bot\sc2\ids\buff_id.py" />
+    <Compile Include="bot\sc2\ids\effect_id.py" />
+    <Compile Include="bot\sc2\ids\unit_typeid.py" />
+    <Compile Include="bot\sc2\ids\upgrade_id.py" />
+    <Compile Include="bot\sc2\ids\__init__.py" />
+    <Compile Include="bot\sc2\main.py" />
+    <Compile Include="bot\sc2\maps.py" />
+    <Compile Include="bot\sc2\paths.py" />
+    <Compile Include="bot\sc2\pixel_map.py" />
+    <Compile Include="bot\sc2\player.py" />
+    <Compile Include="bot\sc2\portconfig.py" />
+    <Compile Include="bot\sc2\position.py" />
+    <Compile Include="bot\sc2\power_source.py" />
+    <Compile Include="bot\sc2\protocol.py" />
+    <Compile Include="bot\sc2\renderer.py" />
+    <Compile Include="bot\sc2\sc2process.py" />
+    <Compile Include="bot\sc2\score.py" />
+    <Compile Include="bot\sc2\tmpfix.py" />
+    <Compile Include="bot\sc2\unit.py" />
+    <Compile Include="bot\sc2\units.py" />
+    <Compile Include="bot\sc2\unit_command.py" />
+    <Compile Include="bot\sc2\__init__.py" />
+    <Compile Include="bot\techtree\techtree.py" />
+    <Compile Include="bot\__init__.py" />
+    <Compile Include="run_locally.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bot\" />
+    <Folder Include="bot\.vscode\" />
+    <Folder Include="bot\economy\" />
+    <Folder Include="bot\economy\__pycache__\" />
+    <Folder Include="bot\game\" />
+    <Folder Include="bot\game\__pycache__\" />
+    <Folder Include="bot\knowledge\" />
+    <Folder Include="bot\knowledge\__pycache__\" />
+    <Folder Include="bot\raceinterface\" />
+    <Folder Include="bot\raceinterface\__pycache__\" />
+    <Folder Include="bot\sc2\" />
+    <Folder Include="bot\sc2\helpers\" />
+    <Folder Include="bot\sc2\ids\" />
+    <Folder Include="bot\techtree\" />
+    <Folder Include="bot\techtree\__pycache__\" />
+    <Folder Include="bot\__pycache__\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="botinfo.json" />
+    <Content Include="bot\.vscode\settings.json" />
+    <Content Include="bot\economy\__pycache__\base.cpython-37.pyc" />
+    <Content Include="bot\economy\__pycache__\basemanager.cpython-37.pyc" />
+    <Content Include="bot\game\__pycache__\game.cpython-37.pyc" />
+    <Content Include="bot\game\__pycache__\gameinfocache.cpython-37.pyc" />
+    <Content Include="bot\knowledge\__pycache__\scouting.cpython-37.pyc" />
+    <Content Include="bot\raceinterface\__pycache__\buildingplacement.cpython-37.pyc" />
+    <Content Include="bot\raceinterface\__pycache__\raceinterface.cpython-37.pyc" />
+    <Content Include="bot\techtree\__pycache__\techtree.cpython-37.pyc" />
+    <Content Include="bot\__pycache__\constants.cpython-37.pyc" />
+    <Content Include="bot\__pycache__\main.cpython-37.pyc" />
+    <Content Include="bot\__pycache__\__init__.cpython-37.pyc" />
+    <Content Include="data.json" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
        Visual Studio and specify your pre- and post-build commands in
