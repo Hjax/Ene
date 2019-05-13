@@ -1,0 +1,5 @@
+*.pyperf
+*.SC2Replay
+.vs/*
+*.pyc
+*/__pycache__/*

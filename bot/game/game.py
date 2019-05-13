@@ -36,6 +36,7 @@ class Game:
         for unitdatakey in self.unit_type_data().keys():
             if unittype.value == unitdatakey:
                 return self.unit_type_data()[unitdatakey].creation_ability.id
+
         return None
     
     def get_unit_by_id(self, unittypeid):

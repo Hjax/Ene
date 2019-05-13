@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<ProfilingTarget xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <ProjectTarget>
-    <TargetProject>06e191cd-bb92-4341-87c1-3729a10c2f70</TargetProject>
-    <FriendlyName>Ene</FriendlyName>
-  </ProjectTarget>
-  <UseVTune>false</UseVTune>
-</ProfilingTarget>
