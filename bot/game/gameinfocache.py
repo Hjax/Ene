@@ -42,19 +42,19 @@ class GameInfoCache:
                 else:
                     thing = self.bot.game.get_production_ability(unit.type_id)
                     self.production[self.bot.game.get_production_ability(unit.type_id)] = self.production.get(self.bot.game.get_production_ability(unit.type_id), 0) + 1
-                self.visible_friendly[unit.tag] = unit
                 if unit.type_id in self.visible_friendly:
                     self.visible_friendly[unit.type_id].append(unit)
                 else:
                     self.visible_friendly[unit.type_id] = [unit]
                 for order in unit.orders:
-                    self.production[order.ability.id] = self.production.get(order.ability.id, 0) + 1
+                    current_ability = order.ability.id
+                    self.production[current_ability] = self.production.get(current_ability, 0) + 1
                     if (self.bot.game.is_worker(unit.type_id)):
-                        if order.ability.id == sc2.AbilityId.ZERGBUILD_EXTRACTOR or order.ability.id == sc2.AbilityId.PROTOSSBUILD_ASSIMILATOR or order.ability.id == sc2.AbilityId.TERRANBUILD_REFINERY:
+                        if current_ability == sc2.AbilityId.ZERGBUILD_EXTRACTOR or current_ability == sc2.AbilityId.PROTOSSBUILD_ASSIMILATOR or current_ability == sc2.AbilityId.TERRANBUILD_REFINERY:
                             self.claimed_gases.add(order.target.tag)
-                        if (order.ability.id != sc2.AbilityId.HARVEST_GATHER and order.ability.id != sc2.AbilityId.HARVEST_RETURN):
+                        if (current_ability != sc2.AbilityId.HARVEST_GATHER and current_ability != sc2.AbilityId.HARVEST_RETURN):
                             for unitdata in self.bot.game.unit_type_data().values():
-                                if order.ability.id == unitdata.creation_ability:
+                                if current_ability == unitdata.creation_ability:
                                     self.workers_building.add(unit.tag)
                                     break
 
