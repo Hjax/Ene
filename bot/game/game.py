@@ -53,6 +53,12 @@ class Game:
     def units(self) -> sc2.units.Units:
         return self.bot.state.units
 
+    def my_units(self) -> sc2.units.Units:
+        return self.bot.units
+    
+    def my_units_of_type(self, unittype):
+        return self.bot.units(unittype)
+
     def get_unit(self, tag) -> sc2.unit.Unit:
         return self.units().by_tag(tag)
 
@@ -110,6 +116,9 @@ class Game:
 
     def is_worker(self, unittype):
         return unittype in [sc2.UnitTypeId.DRONE, sc2.UnitTypeId.SCV, sc2.UnitTypeId.PROBE]
+    
+    def is_gas(self, unittype):
+        return unittype in [sc2.UnitTypeId.REFINERY, sc2.UnitTypeId.ASSIMILATOR, sc2.UnitTypeId.EXTRACTOR]
 
     def is_structure(self, unittype):
         pass

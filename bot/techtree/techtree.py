@@ -3,7 +3,9 @@ import json
 class TechTree:
     def __init__(self, bot):
         self.bot = bot
-        self.data = json.loads(open("data.json", "r").read())
+        file_object = open("data.json", "r")
+        self.data = json.loads(file_object.read())
+        file_object.close()
 
     def get_ability_data(self, id):
         for item in self.data["Ability"]:

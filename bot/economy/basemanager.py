@@ -27,6 +27,13 @@ class BaseManager:
                     best = base 
         return best
     
+    def base_count(self):
+        total = 0
+        for base in self.bases:
+            if base.has_command_structure_of(sc2.data.Alliance.Self):
+                total += 1
+        return total
+
     def next_base(self):
         best = None 
         best_dist = 9999
@@ -36,4 +43,11 @@ class BaseManager:
                     best_dist = self.main_base().position.distance_to(base.position) - base.position.distance_to(self.bot.scouting.closest_enemy_spawn()) < best_dist
                     best = base
         return best
+    
+    def active_gases(self):
+        total = 0
+        for unit in self.bot.game.units_of_type(self.bot.race_interface.get_race_gas()):
+            if unit.vespene_contents > 0:
+                total += 1
+        return total
 
