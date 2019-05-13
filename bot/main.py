@@ -37,6 +37,9 @@ class MyBot(sc2.BotAI):
             self.game_info_cache = GameInfoCache(self)
 
         self.game.start_step()
+
+        await self.distribute_workers()
+
         start = time.time()
         self.game_info_cache.on_step()
         print((time.time() - start) * 1000)

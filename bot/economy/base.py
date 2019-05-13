@@ -23,3 +23,13 @@ class Base:
     def has_command_structure(self):
         return self.command_structure is not None
     
+    def mineral_line_center(self):
+        result = sc2.position.Point2([0, 0])
+        total = 0
+        for resource in self.minerals + self.gases:
+            result += resource.position
+            total += 1
+        if total == 0:
+            return result
+        self.bot._client.debug_box_out(sc2.position.Point2([result[0] / total, result[1] / total]), sc2.position.Point2([(result[0] / total) + 1, (result[1] / total) + 1]))
+        return sc2.position.Point2([result[0] / total, result[1] / total])

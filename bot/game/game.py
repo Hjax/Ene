@@ -18,6 +18,8 @@ class Game:
         for message in self.messages:
             await self.bot.chat_send(message)
         await self.bot.do_actions(self.actions)
+        if Constants.DEBUG:
+            await self.bot._client.send_debug()
     
     def unit_type_data(self):
         return self.bot._game_data.units
