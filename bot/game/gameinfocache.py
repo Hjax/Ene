@@ -8,8 +8,6 @@ class GameInfoCache:
         self.current_units = {}
 
         self.production = {}
-        self.counts_friendly = {}
-        self.counts_enemy = {}
 
         self.visible_friendly = {}
         self.visible_enemy = {}
@@ -20,8 +18,6 @@ class GameInfoCache:
     
     def on_step(self):
         self.production = {}
-        self.counts_friendly = {}
-        self.counts_enemy = {}
 
         self.current_units = {}
 
@@ -37,10 +33,7 @@ class GameInfoCache:
             self.current_units[unit.tag] = unit
 
             if (unit.alliance == sc2.data.Alliance.Self.value):
-                if (unit.is_ready):
-                    self.counts_friendly[unit.type_id] = self.counts_friendly.get(unit.type_id, 0) + 1
-                else:
-                    thing = self.bot.game.get_production_ability(unit.type_id)
+                if (not unit.is_ready and not (self.bot.game.race() == sc2.data.Race.Terran)):
                     self.production[self.bot.game.get_production_ability(unit.type_id)] = self.production.get(self.bot.game.get_production_ability(unit.type_id), 0) + 1
                 if unit.type_id in self.visible_friendly:
                     self.visible_friendly[unit.type_id].append(unit)
@@ -59,7 +52,6 @@ class GameInfoCache:
                                     break
 
             elif (unit.alliance == sc2.data.Alliance.Enemy.value):
-                self.counts_enemy[unit.type_id] = self.counts_enemy.get(unit.type_id, 0) + 1
                 if unit.type_id in self.visible_enemy:
                     self.visible_enemy[unit.type_id].append(unit)
                 else:
@@ -70,3 +62,6 @@ class GameInfoCache:
                     self.visible_neutral[unit.type_id].append(unit)
                 else:
                     self.visible_neutral[unit.type_id] = [unit]
+
+    def count(self, unittype, alliance):
+        pass

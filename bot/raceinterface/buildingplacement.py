@@ -10,7 +10,7 @@ class BuildingPlacement:
             return self.bot.base_manager.next_base().position
         if self.bot.game.is_gas(unittype):
             return self.get_gas_placement()
-        if unittype == sc2.UnitTypeId.PYLON or self.bot.game.get_unit_type_data()[unittype].race != sc2.Race.Protoss:
+        if unittype == sc2.UnitTypeId.PYLON or self.bot.game.unit_type_data()[unittype.value].race != sc2.Race.Protoss:
             for base in self.bot.base_manager.bases:
                 if base.has_command_structure_of(sc2.data.Alliance.Self):
                     start = time.time()
